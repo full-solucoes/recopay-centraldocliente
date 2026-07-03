@@ -1,0 +1,168 @@
+/* =========================================================================
+   Bootstrap customizado pelos tokens RecoPay
+   Importado APOS o bootstrap.css (ver main.css).
+   ========================================================================= */
+
+:root {
+  --bs-body-font-family: var(--font-sans);
+  --bs-body-font-size: var(--text-sm);
+  --bs-body-color: var(--text-primary);
+  --bs-body-bg: var(--surface-page);
+  --bs-border-color: var(--border-default);
+  --bs-border-radius: var(--radius-sm);
+  --bs-border-radius-sm: var(--radius-sm);
+  --bs-border-radius-lg: var(--radius-lg);
+  --bs-primary: var(--action-primary);
+  --bs-primary-rgb: 123, 31, 162;
+  --bs-link-color: var(--action-primary);
+  --bs-link-hover-color: var(--action-primary-hover);
+}
+
+/* ---- Botoes ----------------------------------------------------------- */
+.btn {
+  --bs-btn-border-radius: var(--radius-md);
+  font-weight: var(--font-medium);
+  padding: var(--space-3) var(--space-6);
+}
+
+.btn-primary {
+  --bs-btn-bg: var(--action-primary);
+  --bs-btn-border-color: var(--action-primary);
+  --bs-btn-hover-bg: var(--action-primary-hover);
+  --bs-btn-hover-border-color: var(--action-primary-hover);
+  --bs-btn-active-bg: var(--action-primary-hover);
+  --bs-btn-active-border-color: var(--action-primary-hover);
+  --bs-btn-disabled-bg: var(--action-primary);
+  --bs-btn-disabled-border-color: var(--action-primary);
+  color: var(--text-on-dark);
+}
+
+.btn-outline-primary {
+  --bs-btn-color: var(--action-primary);
+  --bs-btn-border-color: var(--border-default);
+  --bs-btn-hover-bg: rgba(123, 31, 162, 0.08);
+  --bs-btn-hover-border-color: var(--action-primary);
+  --bs-btn-hover-color: var(--action-primary);
+  --bs-btn-active-bg: rgba(123, 31, 162, 0.12);
+  --bs-btn-active-color: var(--action-primary);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--action-primary);
+}
+.btn-ghost:hover {
+  background: rgba(123, 31, 162, 0.08);
+  color: var(--action-primary);
+}
+
+.btn-secondary {
+  --bs-btn-bg: var(--action-secondary);
+  --bs-btn-color: var(--text-primary);
+  --bs-btn-border-color: var(--border-default);
+  --bs-btn-hover-bg: var(--action-neutral-hover);
+  --bs-btn-hover-border-color: var(--border-default);
+  --bs-btn-hover-color: var(--text-primary);
+}
+
+.btn:focus-visible,
+.btn-check:focus + .btn {
+  box-shadow: var(--ring-focus);
+  outline: none;
+}
+
+/* ---- Formularios ------------------------------------------------------ */
+.form-label {
+  color: var(--text-secondary);
+  font-weight: var(--font-medium);
+  margin-bottom: var(--space-2);
+}
+
+.form-control,
+.form-select {
+  background-color: var(--surface-card);
+  color: var(--text-primary);
+  border-color: var(--border-default);
+  border-radius: var(--radius-sm);
+}
+.form-control::placeholder {
+  color: var(--text-muted);
+}
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--border-focus);
+  box-shadow: var(--ring-focus);
+}
+.form-control:disabled,
+.form-select:disabled {
+  background-color: var(--surface-hover);
+  color: var(--text-muted);
+}
+
+/* ---- Cards ------------------------------------------------------------ */
+.card {
+  background-color: var(--surface-card);
+  border-color: var(--border-default);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-sm);
+}
+.card-title {
+  color: var(--text-primary);
+  font-weight: var(--font-semibold);
+}
+.card-header {
+  background-color: var(--surface-table-header);
+  border-bottom-color: var(--border-subtle);
+}
+
+/* ---- Tabelas ---------------------------------------------------------- */
+.table {
+  --bs-table-bg: transparent;
+  color: var(--text-primary);
+}
+.table > :not(caption) > * > * {
+  padding: var(--space-3) var(--space-4);
+}
+.table thead th {
+  color: var(--text-secondary);
+  font-weight: var(--font-semibold);
+  font-size: var(--text-xs);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  background-color: var(--surface-table-header);
+  border-bottom-color: var(--border-default);
+}
+.table-hover > tbody > tr:hover > * {
+  --bs-table-accent-bg: var(--surface-hover);
+}
+
+/* ---- Badges ----------------------------------------------------------- */
+.badge {
+  font-weight: var(--font-semibold);
+  letter-spacing: 0.02em;
+}
+.badge.rounded-pill {
+  padding: var(--space-1) var(--space-3);
+}
+
+/* ---- Links ----------------------------------------------------------- */
+a {
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* ---- Botao anexo a input (toggle de senha) --------------------------- */
+/* Herda a borda/fundo do input ao inves de destacar com borda escura. */
+.input-group .btn.input-toggle {
+  --bs-btn-bg: var(--surface-card);
+  --bs-btn-color: var(--text-muted);
+  --bs-btn-border-color: var(--border-default);
+  --bs-btn-hover-bg: var(--surface-hover);
+  --bs-btn-hover-color: var(--text-secondary);
+  --bs-btn-hover-border-color: var(--border-default);
+  --bs-btn-active-bg: var(--surface-hover);
+  --bs-btn-active-color: var(--text-secondary);
+  --bs-btn-active-border-color: var(--border-default);
+}

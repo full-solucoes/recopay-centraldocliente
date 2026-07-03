@@ -1,0 +1,84 @@
+/* =========================================================================
+   RecoPay Design System - Tokens semanticos (v1)
+   Fonte: design-system.md
+   ========================================================================= */
+
+:root {
+  /* Texto */
+  --text-primary: #2a2a2a; /* headings e texto principal */
+  --text-secondary: #56595e; /* labels e descricoes */
+  --text-muted: #6b7280; /* microcopy, ajuda, timestamps */
+  --text-on-dark: #ffffff; /* texto no sidebar e superficies escuras */
+  --text-disabled: #a1a1aa;
+
+  /* Superficies */
+  --surface-page: #f5f5fa; /* fundo das paginas */
+  --surface-card: #ffffff; /* cards, tabelas, modais */
+  --surface-sidebar: #4b0d6b; /* sidebar (base) */
+  --surface-elevated: #ffffff; /* dropdowns/modais sobrepostos */
+  --surface-hover: #f9fafb; /* hover em tabelas e listas */
+  --surface-table-header: #fcfcfd; /* cabecalho de tabelas */
+
+  /* Acoes */
+  --action-primary: #7b1fa2; /* botoes primarios e CTAs */
+  --action-primary-hover: #6f1c92; /* hover (escurecido ~10%) */
+  --action-secondary: #ffffff; /* botoes secundarios (outline/neutral) */
+  --action-neutral-hover: #f3f4f6; /* hover suave para botoes outline */
+  --action-disabled: #e9e9ee;
+
+  /* Bordas e Foco */
+  --border-default: #e0e0ec; /* borda padrao de inputs/cards */
+  --border-subtle: #ececf1; /* separadores suaves / linhas internas */
+  --border-focus: #7b1fa2; /* foco (inputs/controles) */
+  --ring-focus: 0 0 0 3px rgba(123, 31, 162, 0.2);
+
+  /* Status */
+  --status-success: #198754; /* sucesso/confirmado/pago */
+  --status-warning: #d4984b; /* atencao/pendencia */
+  --status-error: #dd3b4a; /* erro/cancelado/atraso */
+
+  /* Z-Index */
+  --z-elevated: 10;
+  --z-dropdown: 100;
+  --z-header: 200;
+  --z-sidebar: 300;
+  --z-modal: 2500; /* acima de sidebar/topbar e abaixo de SweetAlert2 */
+
+  /* Tipografia */
+  --font-sans: Inter, system-ui, -apple-system, "Segoe UI", Roboto, Arial, sans-serif;
+  --text-xxs: 11px;
+  --text-xs: 12px;
+  --text-sm: 14px;
+  --text-base: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 30px;
+
+  --font-normal: 400;
+  --font-medium: 500;
+  --font-semibold: 600;
+  --font-bold: 700;
+
+  /* Espacamentos (grid 8px) */
+  --space-1: 4px;
+  --space-2: 8px;
+  --space-3: 12px;
+  --space-4: 16px;
+  --space-6: 24px;
+  --space-8: 32px;
+  --space-12: 48px;
+  --space-16: 64px;
+
+  /* Radius */
+  --radius-sm: 6px; /* inputs, badges pequenos */
+  --radius-md: 10px; /* botoes */
+  --radius-lg: 12px; /* cards */
+  --radius-xl: 16px; /* modais e containers grandes */
+  --radius-full: 9999px; /* pills/badges */
+
+  /* Sombras */
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 6px 18px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 16px 40px rgba(0, 0, 0, 0.14);
+}
