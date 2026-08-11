@@ -2045,6 +2045,10 @@
             "type": "string",
             "nullable": true
           },
+          "detalheMetrica": {
+            "type": "string",
+            "nullable": true
+          },
           "unidade": {
             "type": "string",
             "nullable": true

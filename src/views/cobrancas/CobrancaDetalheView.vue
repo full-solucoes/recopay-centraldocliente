@@ -45,7 +45,7 @@
                     <tr v-for="item in itens" :key="item.id">
                       <td>
                         <div class="fw-semibold" style="color: var(--text-primary)">{{ item.descricao || item.codigo || 'Item' }}</div>
-                        <small v-if="item.tipoItem" class="text-muted-2">{{ item.tipoItem }}</small>
+                        <small v-if="item.detalheMetrica" class="d-block text-muted-2">{{ item.detalheMetrica }}</small>
                       </td>
                       <td class="text-end">{{ item.quantidade }} {{ item.unidade || '' }}</td>
                       <td class="text-end">{{ formatarMoeda(item.valorUnitario) }}</td>
