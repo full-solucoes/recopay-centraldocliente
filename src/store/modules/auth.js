@@ -7,7 +7,7 @@ const SESSION_KEY = 'recopay_session'
 
 function lerSessao() {
   try {
-    const raw = localStorage.getItem(SESSION_KEY)
+    const raw = sessionStorage.getItem(SESSION_KEY)
     return raw ? JSON.parse(raw) : null
   } catch (_e) {
     return null
@@ -16,8 +16,8 @@ function lerSessao() {
 
 function gravarSessao(sessao) {
   try {
-    if (sessao) localStorage.setItem(SESSION_KEY, JSON.stringify(sessao))
-    else localStorage.removeItem(SESSION_KEY)
+    if (sessao) sessionStorage.setItem(SESSION_KEY, JSON.stringify(sessao))
+    else sessionStorage.removeItem(SESSION_KEY)
   } catch (_e) {
     /* storage indisponivel */
   }
@@ -94,7 +94,7 @@ export default {
 
     async trocarSenha({ commit }, { novaSenha, confirmacaoSenha }) {
       const dados = await apiTrocarSenha(novaSenha, confirmacaoSenha)
-      commit('SET_TROCA_OBRIGATORIA', false)
+      commit('LIMPAR')
       return dados
     },
 

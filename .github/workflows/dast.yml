@@ -1,0 +1,21 @@
+name: DAST homologacao
+on:
+  workflow_dispatch:
+    inputs:
+      target:
+        description: URL HTTPS isolada de homologacao
+        required: true
+        type: string
+permissions:
+  contents: read
+jobs:
+  zap:
+    if: startsWith(inputs.target, 'https://')
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: zaproxy/action-baseline@v0.15.0
+        with:
+          target: ${{ inputs.target }}
+          allow_issue_writing: false
+          fail_action: true

@@ -122,7 +122,7 @@ export default {
           confirmacaoSenha: this.confirmacao
         })
         await this.$alert('success', 'Senha atualizada', 'Sua nova senha foi definida com sucesso.')
-        this.$router.push({ name: 'dashboard' })
+        this.$router.push({ name: 'login' })
       } catch (erro) {
         const status = erro?.response?.status
         let msg = mensagemDeErro(erro)

@@ -21,7 +21,7 @@ const TOKEN_KEY = 'recopay_token'
 
 export function getToken() {
   try {
-    return localStorage.getItem(TOKEN_KEY) || null
+    return sessionStorage.getItem(TOKEN_KEY) || null
   } catch (_e) {
     return null
   }
@@ -29,8 +29,8 @@ export function getToken() {
 
 export function setToken(token) {
   try {
-    if (token) localStorage.setItem(TOKEN_KEY, token)
-    else localStorage.removeItem(TOKEN_KEY)
+    if (token) sessionStorage.setItem(TOKEN_KEY, token)
+    else sessionStorage.removeItem(TOKEN_KEY)
   } catch (_e) {
     /* storage indisponivel */
   }

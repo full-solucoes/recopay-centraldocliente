@@ -41,6 +41,7 @@ Rotas consumidas pelo portal:
 ```text
 POST /clientes/auth/login
 POST /clientes/auth/recuperar-senha
+POST /clientes/auth/redefinir-senha
 POST /clientes/auth/trocar-senha
 GET /clientes/me
 PATCH /clientes/me
@@ -56,7 +57,7 @@ O login usa `checkoutPublicoId`, e-mail e senha. O portal nao deve enviar ou ace
 
 ## Relacao com checkout
 
-O checkout cria cliente, assinatura e primeira cobranca pela API. A senha provisoria do cliente final e gerada pelo fluxo de recuperacao/acesso da API e entregue pelo fluxo oficial de notificacoes do RecoPayApp.
+O checkout cria cliente, assinatura e primeira cobranca pela API somente depois da confirmacao de e-mail. A recuperacao usa link de uso unico; nenhuma senha e enviada por e-mail.
 
 Depois disso, o cliente usa este portal para consultar cobrancas, notas e historico sem acessar o painel administrativo.
 
@@ -126,7 +127,7 @@ src/
 
 O portal **não** envia/aceita `empresa_id` ou `cliente_id` por tela/rota/query; nunca chama
 gateway de pagamento/fiscal diretamente (apenas redireciona para `checkoutUrl`).
-Token armazenado em `localStorage` e anexado via interceptor; em 401 a sessão é limpa e o
+Token armazenado em `sessionStorage` e anexado via interceptor; em 401 a sessão é limpa e o
 cliente é redirecionado para o login.
 
 ## Deploy
@@ -134,3 +135,11 @@ cliente é redirecionado para o login.
 O build gera assets estáticos em `dist/`, prontos para serem servidos em
 `https://clientes.recopay.com.br`. Defina `VITE_APP_BASE_URL=/` para raiz do domínio,
 ou o subpath correspondente caso o portal fique em subpasta.
+
+## Seguranca da distribuicao publica
+
+A recuperacao envia um link HTTPS de uso unico e curta duracao. A senha so muda depois que o token e consumido; nenhuma senha provisoria e enviada.
+
+O token bearer fica em `sessionStorage`, nao em `localStorage`, e e removido ao fechar a aba. Ele nunca deve aparecer em URL, analytics ou logs. `sessionStorage` ainda e acessivel ao JavaScript da origem; CSP, prevencao de XSS e atualizacao de dependencias continuam obrigatorias. Cookies HttpOnly nao sao o padrao porque o portal suporta dominios proprios separados da API.
+
+Toda variavel `VITE_*` e incorporada ao bundle e nunca pode conter segredo. Use somente HTTPS e aplique os cabecalhos de `public/_headers`; detalhes em `SECURITY-HEADERS.md`.

@@ -30,6 +30,7 @@ export default defineConfig(({ mode }) => {
 
   return {
     plugins: [vue()],
+    build: { sourcemap: false },
     base: baseUrl,
     resolve: {
       alias: {

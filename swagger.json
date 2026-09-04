@@ -6,335 +6,13 @@
     "version": "recopay"
   },
   "paths": {
-    "/checkout/{checkoutPublicoId}/produtos": {
-      "get": {
-        "tags": [
-          "Checkout"
-        ],
-        "summary": "Lista produtos publicos por identificador de checkout",
-        "description": "Retorna os produtos ativos usando o identificador publico opaco da empresa. Esta rota deve ser usada pelo checkout aberto.",
-        "parameters": [
-          {
-            "name": "checkoutPublicoId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ProdutosCheckoutResponseRespostaComDados"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RespostaErro"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Too Many Requests",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RespostaErro"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/checkout/{checkoutPublicoId}/produtos/{produtoCodigo}/planos": {
-      "get": {
-        "tags": [
-          "Checkout"
-        ],
-        "summary": "Lista planos de um produto por identificador de checkout",
-        "description": "Retorna os planos ativos de um produto usando o identificador publico opaco da empresa.",
-        "parameters": [
-          {
-            "name": "checkoutPublicoId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "produtoCodigo",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PlanosProdutoCheckoutResponseRespostaComDados"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RespostaErro"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Too Many Requests",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RespostaErro"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/checkout/{checkoutPublicoId}/planos/{planoId}": {
-      "get": {
-        "tags": [
-          "Checkout"
-        ],
-        "summary": "Obtem detalhes de um plano por identificador de checkout",
-        "description": "Retorna os dados do plano e seus componentes usando o identificador publico opaco da empresa.",
-        "parameters": [
-          {
-            "name": "checkoutPublicoId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "planoId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "integer",
-              "format": "int64"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PlanoCheckoutResponseRespostaComDados"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RespostaErro"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Too Many Requests",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RespostaErro"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/checkout/{checkoutPublicoId}/clientes/verificacao": {
-      "post": {
-        "tags": [
-          "Checkout"
-        ],
-        "summary": "Verifica se cliente ja existe no checkout",
-        "description": "Confere CPF/CNPJ e e-mail para impedir contratacao publica duplicada. Clientes existentes devem autenticar antes de continuar.",
-        "parameters": [
-          {
-            "name": "checkoutPublicoId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ClienteCheckoutVerificacaoRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ClienteCheckoutVerificacaoResponseRespostaComDados"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RespostaErro"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RespostaErro"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Too Many Requests",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RespostaErro"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/checkout/{checkoutPublicoId}/contratacoes": {
-      "post": {
-        "tags": [
-          "Checkout"
-        ],
-        "summary": "Cria contratacao por identificador de checkout",
-        "description": "Cria a contratacao usando o identificador publico opaco da empresa e retorna o link oficial do checkout do RecoPayApp.",
-        "parameters": [
-          {
-            "name": "checkoutPublicoId",
-            "in": "path",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/ContratacaoCheckoutRequest"
-              }
-            }
-          },
-          "required": true
-        },
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/ContratacaoCheckoutResponseRespostaComDados"
-                }
-              }
-            }
-          },
-          "400": {
-            "description": "Bad Request",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RespostaErro"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RespostaErro"
-                }
-              }
-            }
-          },
-          "409": {
-            "description": "Conflict",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RespostaErro"
-                }
-              }
-            }
-          },
-          "429": {
-            "description": "Too Many Requests",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/RespostaErro"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
     "/clientes/auth/login": {
       "post": {
         "tags": [
-          "Clientes"
+          "Central do Cliente"
         ],
         "summary": "Autentica cliente final",
-        "description": "Autentica o cliente final usando o identificador publico da empresa e retorna token para o futuro portal de clientes.",
+        "description": "AUTENTICACAO: rota publica; nao envie chave de integracao.\n\nDEPENDENCIAS E PRE-CONDICOES: checkoutPublicoId valido; cliente ativo com acesso habilitado e credenciais validas.\n\nAutentica o cliente final usando o identificador publico da empresa e retorna token para o futuro portal de clientes.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -375,6 +53,16 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
           }
         }
       }
@@ -382,10 +70,10 @@
     "/clientes/auth/recuperar-senha": {
       "post": {
         "tags": [
-          "Clientes"
+          "Central do Cliente"
         ],
         "summary": "Solicita recuperacao de senha do cliente final",
-        "description": "Gera uma senha provisoria e enfileira o e-mail de recuperacao quando o cliente existir. A resposta e sempre generica para nao revelar cadastro.",
+        "description": "AUTENTICACAO: rota publica; nao envie chave de integracao.\n\nDEPENDENCIAS E PRE-CONDICOES: checkoutPublicoId e e-mail validos; a resposta nunca confirma se o cadastro existe.\n\nEnvia um link de uso unico sem alterar a senha atual. A resposta e sempre generica para nao revelar cadastro.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -397,8 +85,8 @@
           "required": true
         },
         "responses": {
-          "200": {
-            "description": "OK",
+          "202": {
+            "description": "Accepted",
             "content": {
               "application/json": {
                 "schema": {
@@ -416,6 +104,77 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/clientes/auth/redefinir-senha": {
+      "post": {
+        "tags": [
+          "Central do Cliente"
+        ],
+        "summary": "Redefine a senha por token de uso unico",
+        "description": "AUTENTICACAO: rota publica; nao envie chave de integracao.\n\nDEPENDENCIAS E PRE-CONDICOES: token valido, nao utilizado e dentro da expiracao; nova senha atende a politica minima.\n\nValida e consome o token enviado por e-mail. Todas as sessoes anteriores sao revogadas.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClienteRedefinirSenhaRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectRespostaComDados"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
           }
         }
       }
@@ -423,10 +182,10 @@
     "/clientes/auth/trocar-senha": {
       "post": {
         "tags": [
-          "Clientes"
+          "Central do Cliente"
         ],
         "summary": "Define senha definitiva do cliente final",
-        "description": "Troca a senha do cliente final autenticado por token, removendo a obrigatoriedade de troca da senha provisoria.",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com o token rct.* retornado por POST /clientes/auth/login.\n\nDEPENDENCIAS E PRE-CONDICOES: token rct.* valido; nova senha com pelo menos 10 caracteres e confirmacao identica.\n\nTroca a senha do cliente final autenticado por token, removendo a obrigatoriedade de troca da senha provisoria.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -477,17 +236,32 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
           }
-        }
+        },
+        "security": [
+          {
+            "ClienteBearer": [ ]
+          }
+        ]
       }
     },
     "/clientes/me": {
       "get": {
         "tags": [
-          "Clientes"
+          "Central do Cliente"
         ],
         "summary": "Obtem dados do cliente final autenticado",
-        "description": "Retorna dados cadastrais basicos do cliente final autenticado por token.",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com o token rct.* retornado por POST /clientes/auth/login.\n\nDEPENDENCIAS E PRE-CONDICOES: token rct.* valido e nao expirado; empresa e cliente ativos; todo recurso consultado deve pertencer ao cliente autenticado.\n\nRetorna dados cadastrais basicos do cliente final autenticado por token.",
         "responses": {
           "200": {
             "description": "OK",
@@ -528,15 +302,30 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
           }
-        }
+        },
+        "security": [
+          {
+            "ClienteBearer": [ ]
+          }
+        ]
       },
       "patch": {
         "tags": [
-          "Clientes"
+          "Central do Cliente"
         ],
         "summary": "Atualiza dados cadastrais limitados do cliente final",
-        "description": "Permite atualizar telefone, e-mail fiscal e endereco do proprio cliente autenticado. Nome, documento, tipo de pessoa e e-mail de login nao sao alterados por esta rota.",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com o token rct.* retornado por POST /clientes/auth/login.\n\nDEPENDENCIAS E PRE-CONDICOES: token rct.* valido e nao expirado; empresa e cliente ativos; todo recurso consultado deve pertencer ao cliente autenticado.\n\nPermite atualizar telefone, e-mail fiscal e endereco do proprio cliente autenticado. Nome, documento, tipo de pessoa e e-mail de login nao sao alterados por esta rota.",
         "requestBody": {
           "content": {
             "application/json": {
@@ -597,21 +386,37 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
           }
-        }
+        },
+        "security": [
+          {
+            "ClienteBearer": [ ]
+          }
+        ]
       }
     },
     "/clientes/assinaturas": {
       "get": {
         "tags": [
-          "Clientes"
+          "Central do Cliente"
         ],
         "summary": "Lista assinaturas do cliente final autenticado",
-        "description": "Retorna as assinaturas do proprio cliente, com plano, produto, status, vencimento e dados de recorrencia.",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com o token rct.* retornado por POST /clientes/auth/login.\n\nDEPENDENCIAS E PRE-CONDICOES: token rct.* valido e nao expirado; empresa e cliente ativos; todo recurso consultado deve pertencer ao cliente autenticado.\n\nRetorna as assinaturas do proprio cliente, com plano, produto, status, vencimento e dados de recorrencia.",
         "parameters": [
           {
             "name": "status",
             "in": "query",
+            "description": "Filtro opcional pelo status nativo da assinatura, por exemplo: ativa, suspensa, cancelada ou encerrada.",
             "schema": {
               "type": "string"
             }
@@ -619,7 +424,9 @@
           {
             "name": "pagina",
             "in": "query",
+            "description": "Pagina solicitada. Valores menores que 1 sao normalizados para 1. Padrao: 1.",
             "schema": {
+              "minimum": 1,
               "type": "integer",
               "format": "int32",
               "default": 1
@@ -628,7 +435,10 @@
           {
             "name": "tamanhoPagina",
             "in": "query",
+            "description": "Quantidade de itens por pagina, entre 1 e 100. Valores fora da faixa sao normalizados. Padrao: 20.",
             "schema": {
+              "maximum": 100,
+              "minimum": 1,
               "type": "integer",
               "format": "int32",
               "default": 20
@@ -665,17 +475,32 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
           }
-        }
+        },
+        "security": [
+          {
+            "ClienteBearer": [ ]
+          }
+        ]
       }
     },
     "/clientes/assinaturas/{id}": {
       "get": {
         "tags": [
-          "Clientes"
+          "Central do Cliente"
         ],
         "summary": "Obtem uma assinatura do cliente final autenticado",
-        "description": "Retorna os dados de uma assinatura do proprio cliente, incluindo componentes snapshotados.",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com o token rct.* retornado por POST /clientes/auth/login.\n\nDEPENDENCIAS E PRE-CONDICOES: token rct.* valido e nao expirado; empresa e cliente ativos; todo recurso consultado deve pertencer ao cliente autenticado.\n\nRetorna os dados de uma assinatura do proprio cliente, incluindo componentes snapshotados.",
         "parameters": [
           {
             "name": "id",
@@ -727,17 +552,32 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
           }
-        }
+        },
+        "security": [
+          {
+            "ClienteBearer": [ ]
+          }
+        ]
       }
     },
     "/clientes/assinaturas/{id}/cancelamento": {
       "post": {
         "tags": [
-          "Clientes"
+          "Central do Cliente"
         ],
         "summary": "Cancela uma assinatura do cliente final autenticado",
-        "description": "Cancela uma assinatura ativa do proprio cliente. O cancelamento encerra a recorrencia e cancela apenas cobrancas futuras ainda em aberto.",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com o token rct.* retornado por POST /clientes/auth/login.\n\nDEPENDENCIAS E PRE-CONDICOES: token rct.* valido e nao expirado; empresa e cliente ativos; todo recurso consultado deve pertencer ao cliente autenticado.\n\nCancela uma assinatura ativa do proprio cliente. O cancelamento encerra a recorrencia e cancela apenas cobrancas futuras ainda em aberto.",
         "parameters": [
           {
             "name": "id",
@@ -819,17 +659,32 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
           }
-        }
+        },
+        "security": [
+          {
+            "ClienteBearer": [ ]
+          }
+        ]
       }
     },
     "/clientes/assinaturas/{id}/cobrancas": {
       "get": {
         "tags": [
-          "Clientes"
+          "Central do Cliente"
         ],
         "summary": "Lista cobrancas de uma assinatura",
-        "description": "Retorna as cobrancas da assinatura informada, desde que ela pertenca ao cliente autenticado.",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com o token rct.* retornado por POST /clientes/auth/login.\n\nDEPENDENCIAS E PRE-CONDICOES: token rct.* valido e nao expirado; empresa e cliente ativos; todo recurso consultado deve pertencer ao cliente autenticado.\n\nRetorna as cobrancas da assinatura informada, desde que ela pertenca ao cliente autenticado.",
         "parameters": [
           {
             "name": "id",
@@ -843,6 +698,7 @@
           {
             "name": "status",
             "in": "query",
+            "description": "Filtro opcional pelo status nativo da cobranca, por exemplo: pendente, vencida, paga ou cancelada.",
             "schema": {
               "type": "string"
             }
@@ -850,7 +706,9 @@
           {
             "name": "pagina",
             "in": "query",
+            "description": "Pagina solicitada. Valores menores que 1 sao normalizados para 1. Padrao: 1.",
             "schema": {
+              "minimum": 1,
               "type": "integer",
               "format": "int32",
               "default": 1
@@ -859,7 +717,10 @@
           {
             "name": "tamanhoPagina",
             "in": "query",
+            "description": "Quantidade de itens por pagina, entre 1 e 100. Valores fora da faixa sao normalizados. Padrao: 20.",
             "schema": {
+              "maximum": 100,
+              "minimum": 1,
               "type": "integer",
               "format": "int32",
               "default": 20
@@ -906,17 +767,32 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
           }
-        }
+        },
+        "security": [
+          {
+            "ClienteBearer": [ ]
+          }
+        ]
       }
     },
     "/clientes/assinaturas/{id}/pagamentos": {
       "get": {
         "tags": [
-          "Clientes"
+          "Central do Cliente"
         ],
         "summary": "Lista pagamentos de uma assinatura",
-        "description": "Retorna os pagamentos vinculados as cobrancas da assinatura informada, sempre no escopo do cliente autenticado.",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com o token rct.* retornado por POST /clientes/auth/login.\n\nDEPENDENCIAS E PRE-CONDICOES: token rct.* valido e nao expirado; empresa e cliente ativos; todo recurso consultado deve pertencer ao cliente autenticado.\n\nRetorna os pagamentos vinculados as cobrancas da assinatura informada, sempre no escopo do cliente autenticado.",
         "parameters": [
           {
             "name": "id",
@@ -930,6 +806,7 @@
           {
             "name": "status",
             "in": "query",
+            "description": "Filtro opcional pelo status nativo do pagamento, por exemplo: pendente, aprovado, recusado, cancelado ou estornado.",
             "schema": {
               "type": "string"
             }
@@ -937,7 +814,9 @@
           {
             "name": "pagina",
             "in": "query",
+            "description": "Pagina solicitada. Valores menores que 1 sao normalizados para 1. Padrao: 1.",
             "schema": {
+              "minimum": 1,
               "type": "integer",
               "format": "int32",
               "default": 1
@@ -946,7 +825,10 @@
           {
             "name": "tamanhoPagina",
             "in": "query",
+            "description": "Quantidade de itens por pagina, entre 1 e 100. Valores fora da faixa sao normalizados. Padrao: 20.",
             "schema": {
+              "maximum": 100,
+              "minimum": 1,
               "type": "integer",
               "format": "int32",
               "default": 20
@@ -993,17 +875,32 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
           }
-        }
+        },
+        "security": [
+          {
+            "ClienteBearer": [ ]
+          }
+        ]
       }
     },
     "/clientes/assinaturas/{id}/notas": {
       "get": {
         "tags": [
-          "Clientes"
+          "Central do Cliente"
         ],
         "summary": "Lista notas fiscais de uma assinatura",
-        "description": "Retorna as NFS-e emitidas para cobrancas da assinatura informada, sempre no escopo do cliente autenticado.",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com o token rct.* retornado por POST /clientes/auth/login.\n\nDEPENDENCIAS E PRE-CONDICOES: token rct.* valido e nao expirado; empresa e cliente ativos; todo recurso consultado deve pertencer ao cliente autenticado.\n\nRetorna as NFS-e emitidas para cobrancas da assinatura informada, sempre no escopo do cliente autenticado.",
         "parameters": [
           {
             "name": "id",
@@ -1017,6 +914,7 @@
           {
             "name": "status",
             "in": "query",
+            "description": "Filtro opcional pelo status nativo da NFS-e, por exemplo: pendente, processando, autorizada, negada ou cancelada.",
             "schema": {
               "type": "string"
             }
@@ -1024,7 +922,9 @@
           {
             "name": "pagina",
             "in": "query",
+            "description": "Pagina solicitada. Valores menores que 1 sao normalizados para 1. Padrao: 1.",
             "schema": {
+              "minimum": 1,
               "type": "integer",
               "format": "int32",
               "default": 1
@@ -1033,7 +933,10 @@
           {
             "name": "tamanhoPagina",
             "in": "query",
+            "description": "Quantidade de itens por pagina, entre 1 e 100. Valores fora da faixa sao normalizados. Padrao: 20.",
             "schema": {
+              "maximum": 100,
+              "minimum": 1,
               "type": "integer",
               "format": "int32",
               "default": 20
@@ -1080,21 +983,37 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
           }
-        }
+        },
+        "security": [
+          {
+            "ClienteBearer": [ ]
+          }
+        ]
       }
     },
     "/clientes/cobrancas": {
       "get": {
         "tags": [
-          "Clientes"
+          "Central do Cliente"
         ],
         "summary": "Lista cobrancas do cliente final autenticado",
-        "description": "Retorna cobrancas do proprio cliente autenticado, com paginacao e link oficial de pagamento.",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com o token rct.* retornado por POST /clientes/auth/login.\n\nDEPENDENCIAS E PRE-CONDICOES: token rct.* valido e nao expirado; empresa e cliente ativos; todo recurso consultado deve pertencer ao cliente autenticado.\n\nRetorna cobrancas do proprio cliente autenticado, com paginacao e link oficial de pagamento.",
         "parameters": [
           {
             "name": "status",
             "in": "query",
+            "description": "Filtro opcional pelo status nativo da cobranca, por exemplo: pendente, vencida, paga ou cancelada.",
             "schema": {
               "type": "string"
             }
@@ -1102,7 +1021,9 @@
           {
             "name": "pagina",
             "in": "query",
+            "description": "Pagina solicitada. Valores menores que 1 sao normalizados para 1. Padrao: 1.",
             "schema": {
+              "minimum": 1,
               "type": "integer",
               "format": "int32",
               "default": 1
@@ -1111,7 +1032,10 @@
           {
             "name": "tamanhoPagina",
             "in": "query",
+            "description": "Quantidade de itens por pagina, entre 1 e 100. Valores fora da faixa sao normalizados. Padrao: 20.",
             "schema": {
+              "maximum": 100,
+              "minimum": 1,
               "type": "integer",
               "format": "int32",
               "default": 20
@@ -1148,17 +1072,32 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
           }
-        }
+        },
+        "security": [
+          {
+            "ClienteBearer": [ ]
+          }
+        ]
       }
     },
     "/clientes/cobrancas/{id}": {
       "get": {
         "tags": [
-          "Clientes"
+          "Central do Cliente"
         ],
         "summary": "Obtem uma cobranca do cliente final autenticado",
-        "description": "Retorna os dados de uma cobranca do proprio cliente, incluindo itens e link oficial de pagamento.",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com o token rct.* retornado por POST /clientes/auth/login.\n\nDEPENDENCIAS E PRE-CONDICOES: token rct.* valido e nao expirado; empresa e cliente ativos; todo recurso consultado deve pertencer ao cliente autenticado.\n\nRetorna os dados de uma cobranca do proprio cliente, incluindo itens e link oficial de pagamento.",
         "parameters": [
           {
             "name": "id",
@@ -1210,21 +1149,37 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
           }
-        }
+        },
+        "security": [
+          {
+            "ClienteBearer": [ ]
+          }
+        ]
       }
     },
     "/clientes/notas": {
       "get": {
         "tags": [
-          "Clientes"
+          "Central do Cliente"
         ],
         "summary": "Lista NFS-e do cliente final autenticado",
-        "description": "Retorna as notas fiscais do proprio cliente autenticado, com paginacao e disponibilidade de documentos.",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com o token rct.* retornado por POST /clientes/auth/login.\n\nDEPENDENCIAS E PRE-CONDICOES: token rct.* valido e nao expirado; empresa e cliente ativos; todo recurso consultado deve pertencer ao cliente autenticado.\n\nRetorna as notas fiscais do proprio cliente autenticado, com paginacao e disponibilidade de documentos.",
         "parameters": [
           {
             "name": "status",
             "in": "query",
+            "description": "Filtro opcional pelo status nativo da NFS-e, por exemplo: pendente, processando, autorizada, negada ou cancelada.",
             "schema": {
               "type": "string"
             }
@@ -1232,7 +1187,9 @@
           {
             "name": "pagina",
             "in": "query",
+            "description": "Pagina solicitada. Valores menores que 1 sao normalizados para 1. Padrao: 1.",
             "schema": {
+              "minimum": 1,
               "type": "integer",
               "format": "int32",
               "default": 1
@@ -1241,7 +1198,10 @@
           {
             "name": "tamanhoPagina",
             "in": "query",
+            "description": "Quantidade de itens por pagina, entre 1 e 100. Valores fora da faixa sao normalizados. Padrao: 20.",
             "schema": {
+              "maximum": 100,
+              "minimum": 1,
               "type": "integer",
               "format": "int32",
               "default": 20
@@ -1278,17 +1238,32 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
           }
-        }
+        },
+        "security": [
+          {
+            "ClienteBearer": [ ]
+          }
+        ]
       }
     },
     "/clientes/notas/{id}/pdf": {
       "get": {
         "tags": [
-          "Clientes"
+          "Central do Cliente"
         ],
         "summary": "Baixa o PDF de uma NFS-e do cliente final autenticado",
-        "description": "Entrega o PDF da nota fiscal ao cliente autenticado quando o documento estiver pronto no RecoPayApp.",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com o token rct.* retornado por POST /clientes/auth/login.\n\nDEPENDENCIAS E PRE-CONDICOES: token rct.* valido e nao expirado; empresa e cliente ativos; todo recurso consultado deve pertencer ao cliente autenticado.\n\nEntrega o PDF da nota fiscal ao cliente autenticado quando o documento estiver pronto no RecoPayApp.",
         "parameters": [
           {
             "name": "id",
@@ -1333,17 +1308,32 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
           }
-        }
+        },
+        "security": [
+          {
+            "ClienteBearer": [ ]
+          }
+        ]
       }
     },
     "/clientes/notas/{id}/xml": {
       "get": {
         "tags": [
-          "Clientes"
+          "Central do Cliente"
         ],
         "summary": "Baixa o XML de uma NFS-e do cliente final autenticado",
-        "description": "Entrega o XML salvo em banco ou redireciona para a URL do XML ja disponibilizada pelo RecoPayApp.",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com o token rct.* retornado por POST /clientes/auth/login.\n\nDEPENDENCIAS E PRE-CONDICOES: token rct.* valido e nao expirado; empresa e cliente ativos; todo recurso consultado deve pertencer ao cliente autenticado.\n\nEntrega o XML salvo em banco ou redireciona para a URL do XML ja disponibilizada pelo RecoPayApp.",
         "parameters": [
           {
             "name": "id",
@@ -1391,21 +1381,37 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
           }
-        }
+        },
+        "security": [
+          {
+            "ClienteBearer": [ ]
+          }
+        ]
       }
     },
     "/clientes/pagamentos": {
       "get": {
         "tags": [
-          "Clientes"
+          "Central do Cliente"
         ],
         "summary": "Lista pagamentos do cliente final autenticado",
-        "description": "Retorna o historico de pagamentos do proprio cliente autenticado, com paginacao e dados de apresentacao.",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com o token rct.* retornado por POST /clientes/auth/login.\n\nDEPENDENCIAS E PRE-CONDICOES: token rct.* valido e nao expirado; empresa e cliente ativos; todo recurso consultado deve pertencer ao cliente autenticado.\n\nRetorna o historico de pagamentos do proprio cliente autenticado, com paginacao e dados de apresentacao.",
         "parameters": [
           {
             "name": "status",
             "in": "query",
+            "description": "Filtro opcional pelo status nativo do pagamento, por exemplo: pendente, aprovado, recusado, cancelado ou estornado.",
             "schema": {
               "type": "string"
             }
@@ -1413,7 +1419,9 @@
           {
             "name": "pagina",
             "in": "query",
+            "description": "Pagina solicitada. Valores menores que 1 sao normalizados para 1. Padrao: 1.",
             "schema": {
+              "minimum": 1,
               "type": "integer",
               "format": "int32",
               "default": 1
@@ -1422,7 +1430,10 @@
           {
             "name": "tamanhoPagina",
             "in": "query",
+            "description": "Quantidade de itens por pagina, entre 1 e 100. Valores fora da faixa sao normalizados. Padrao: 20.",
             "schema": {
+              "maximum": 100,
+              "minimum": 1,
               "type": "integer",
               "format": "int32",
               "default": 20
@@ -1459,8 +1470,1787 @@
                 }
               }
             }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ClienteBearer": [ ]
+          }
+        ]
+      }
+    },
+    "/checkout/{checkoutPublicoId}/produtos": {
+      "get": {
+        "tags": [
+          "Checkout"
+        ],
+        "summary": "Lista produtos publicos por identificador de checkout",
+        "description": "AUTENTICACAO: rota publica; nao envie chave de integracao.\n\nDEPENDENCIAS E PRE-CONDICOES: checkoutPublicoId valido e empresa ativa; somente produtos ativos sao retornados.\n\nRetorna os produtos ativos usando o identificador publico opaco da empresa. Esta rota deve ser usada pelo checkout aberto.",
+        "parameters": [
+          {
+            "name": "checkoutPublicoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ProdutosCheckoutResponseRespostaComDados"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
           }
         }
+      }
+    },
+    "/checkout/{checkoutPublicoId}/produtos/{produtoCodigo}/planos": {
+      "get": {
+        "tags": [
+          "Checkout"
+        ],
+        "summary": "Lista planos de um produto por identificador de checkout",
+        "description": "AUTENTICACAO: rota publica; nao envie chave de integracao.\n\nDEPENDENCIAS E PRE-CONDICOES: checkoutPublicoId valido e empresa ativa; produto ativo pertencente a empresa.\n\nRetorna os planos ativos de um produto usando o identificador publico opaco da empresa.",
+        "parameters": [
+          {
+            "name": "checkoutPublicoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "produtoCodigo",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanosProdutoCheckoutResponseRespostaComDados"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/checkout/{checkoutPublicoId}/planos/{planoId}": {
+      "get": {
+        "tags": [
+          "Checkout"
+        ],
+        "summary": "Obtem detalhes de um plano por identificador de checkout",
+        "description": "AUTENTICACAO: rota publica; nao envie chave de integracao.\n\nDEPENDENCIAS E PRE-CONDICOES: checkoutPublicoId valido e empresa ativa; plano ativo pertencente a empresa.\n\nRetorna os dados do plano e seus componentes usando o identificador publico opaco da empresa.",
+        "parameters": [
+          {
+            "name": "checkoutPublicoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "planoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PlanoCheckoutResponseRespostaComDados"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/checkout/{checkoutPublicoId}/clientes/verificacao": {
+      "post": {
+        "tags": [
+          "Checkout"
+        ],
+        "summary": "Verifica se cliente ja existe no checkout",
+        "description": "AUTENTICACAO: rota publica; nao envie chave de integracao.\n\nDEPENDENCIAS E PRE-CONDICOES: checkoutPublicoId valido e empresa ativa; CPF/CNPJ e e-mail validos.\n\nValida apenas o formato de CPF/CNPJ e e-mail e retorna resposta uniforme, sem revelar se o cadastro existe.",
+        "parameters": [
+          {
+            "name": "checkoutPublicoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ClienteCheckoutVerificacaoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClienteCheckoutVerificacaoResponseRespostaComDados"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/checkout/{checkoutPublicoId}/cupons/simulacao": {
+      "post": {
+        "tags": [
+          "Checkout"
+        ],
+        "summary": "Valida e simula um cupom no checkout",
+        "description": "AUTENTICACAO: rota publica; nao envie chave de integracao.\n\nDEPENDENCIAS E PRE-CONDICOES: checkoutPublicoId valido e empresa ativa; utilitario de cupons ativo; plano e componentes validos.\n\nValida um codigo sem expor o catalogo de cupons. O valor e calculado no servidor com os componentes do plano e sera validado novamente ao criar a contratacao.",
+        "parameters": [
+          {
+            "name": "checkoutPublicoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CupomCheckoutSimulacaoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CupomCheckoutResponseRespostaComDados"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/checkout/{checkoutPublicoId}/contratacoes": {
+      "post": {
+        "tags": [
+          "Checkout"
+        ],
+        "summary": "Cria contratacao por identificador de checkout",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com o token rct.* retornado por POST /clientes/auth/login.\n\nDEPENDENCIAS E PRE-CONDICOES: checkoutPublicoId valido e empresa ativa; plano ativo, componentes validos e termos aceitos quando exigidos; cliente deve enviar token rct.* valido; cliente anonimo usa /contratacoes/intencoes; Idempotency-Key obrigatoria para repeticao segura; cupom, quando informado, exige o utilitario correspondente ativo.\n\nCria a contratacao direta de cliente autenticado e retorna o link oficial de pagamento. Cliente anonimo deve usar a intencao com confirmacao de e-mail.",
+        "parameters": [
+          {
+            "name": "checkoutPublicoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "OBRIGATORIA. Identificador unico com ate 120 caracteres. Em timeout ou falha de rede, repita o mesmo payload com a mesma chave; outro corpo com a mesma chave retorna 409 idempotencia_conflitante.",
+            "required": true,
+            "schema": {
+              "maxLength": 120,
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContratacaoCheckoutRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContratacaoCheckoutResponseRespostaComDados"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "ClienteBearer": [ ]
+          }
+        ]
+      }
+    },
+    "/checkout/{checkoutPublicoId}/contratacoes/intencoes": {
+      "post": {
+        "tags": [
+          "Checkout"
+        ],
+        "summary": "Envia confirmacao de e-mail para uma contratacao anonima",
+        "description": "AUTENTICACAO: rota publica; nao envie chave de integracao.\n\nDEPENDENCIAS E PRE-CONDICOES: checkoutPublicoId e origem HTTPS autorizados; nenhum registro financeiro e criado nesta etapa.\n\nValida os dados sem criar cliente, assinatura ou cobranca e envia um link de uso unico para confirmar o e-mail.",
+        "parameters": [
+          {
+            "name": "checkoutPublicoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ContratacaoCheckoutRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectRespostaComDados"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/checkout/{checkoutPublicoId}/contratacoes/intencoes/confirmacao": {
+      "post": {
+        "tags": [
+          "Checkout"
+        ],
+        "summary": "Confirma a posse do e-mail da contratacao",
+        "description": "Consome a confirmacao enviada por e-mail sem concluir a contratacao.",
+        "parameters": [
+          {
+            "name": "checkoutPublicoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmarIntencaoContratacaoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ObjectRespostaComDados"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/checkout/{checkoutPublicoId}/contratacoes/intencoes/concluir": {
+      "post": {
+        "tags": [
+          "Checkout"
+        ],
+        "summary": "Conclui uma contratacao com e-mail confirmado",
+        "description": "Cria cliente, assinatura e cobranca a partir da intencao confirmada. Exige Idempotency-Key.",
+        "parameters": [
+          {
+            "name": "checkoutPublicoId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "OBRIGATORIA. Identificador unico com ate 120 caracteres. Em timeout ou falha de rede, repita o mesmo payload com a mesma chave; outro corpo com a mesma chave retorna 409 idempotencia_conflitante.",
+            "required": true,
+            "schema": {
+              "maxLength": 120,
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConfirmarIntencaoContratacaoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ContratacaoCheckoutResponseRespostaComDados"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/integracoes/clientes/por-documento/{documento}": {
+      "get": {
+        "tags": [
+          "Integracoes - clientes"
+        ],
+        "summary": "Localiza um cliente pelo CPF ou CNPJ",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com uma chave rpk_ de integracao. Idempotency-Key nunca substitui o Bearer.\n\nESCOPO OBRIGATORIO: clientes:ler.\n\nDEPENDENCIAS E PRE-CONDICOES: utilitario Integracoes Externas ativo; cliente pertencente a empresa autenticada.\n\nRetorna o cliente pertencente a empresa autenticada, inclusive quando estiver inativo. Requer o escopo clientes:ler.",
+        "parameters": [
+          {
+            "name": "documento",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClienteIntegracaoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "IntegracaoBearer": [ ]
+          }
+        ]
+      }
+    },
+    "/integracoes/clientes": {
+      "post": {
+        "tags": [
+          "Integracoes - clientes"
+        ],
+        "summary": "Cria um cliente",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com uma chave rpk_ de integracao. Idempotency-Key nunca substitui o Bearer.\n\nESCOPO OBRIGATORIO: clientes:escrever.\n\nDEPENDENCIAS E PRE-CONDICOES: utilitario Integracoes Externas ativo; Idempotency-Key obrigatoria; documento ainda nao cadastrado na empresa; cadastro inativo nao e reativado automaticamente.\n\nCria um cliente ativo na empresa autenticada. Requer o escopo clientes:escrever e o header Idempotency-Key. Um documento ja cadastrado nao e alterado nem reativado automaticamente.",
+        "parameters": [
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "OBRIGATORIO NESTA CRIACAO. Identificador unico da operacao logica, com ate 120 caracteres: letras, numeros, ponto, hifen, underline ou dois-pontos. Em timeout ou falha de rede, repita o mesmo payload com a mesma chave. Para uma nova criacao, gere uma nova chave. Mesma chave e mesmo payload retornam o recurso anterior; mesma chave com payload diferente retorna 409.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CriarClienteIntegracaoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClienteIntegracaoResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ClienteIntegracaoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "IntegracaoBearer": [ ]
+          }
+        ]
+      }
+    },
+    "/integracoes/clientes/{clienteId}/cobrancas": {
+      "post": {
+        "tags": [
+          "Integracoes - cobrancas"
+        ],
+        "summary": "Cria uma cobranca avulsa para um cliente",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com uma chave rpk_ de integracao. Idempotency-Key nunca substitui o Bearer.\n\nESCOPO OBRIGATORIO: cobrancas:escrever.\n\nDEPENDENCIAS E PRE-CONDICOES: utilitario Integracoes Externas ativo; cliente ativo pertencente a empresa autenticada; Idempotency-Key obrigatoria; a criacao registra a cobranca no RecoPay, mas nao cria antecipadamente uma tentativa no gateway.\n\nCria uma cobranca avulsa para um cliente ativo da empresa autenticada. Requer o escopo cobrancas:escrever e o header Idempotency-Key. O vencimento e ajustado para o proximo dia util brasileiro e eventual retencao obrigatoria de ISS e abatida da cobranca.",
+        "parameters": [
+          {
+            "name": "clienteId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          },
+          {
+            "name": "Idempotency-Key",
+            "in": "header",
+            "description": "OBRIGATORIO NESTA CRIACAO. Identificador unico da operacao logica, com ate 120 caracteres: letras, numeros, ponto, hifen, underline ou dois-pontos. Em timeout ou falha de rede, repita o mesmo payload com a mesma chave. Para uma nova criacao, gere uma nova chave. Mesma chave e mesmo payload retornam o recurso anterior; mesma chave com payload diferente retorna 409.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CriarCobrancaAvulsaRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CobrancaAvulsaResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CobrancaAvulsaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "IntegracaoBearer": [ ]
+          }
+        ]
+      }
+    },
+    "/integracoes/cobrancas/{cobrancaId}": {
+      "get": {
+        "tags": [
+          "Integracoes - cobrancas"
+        ],
+        "summary": "Consulta o status de uma cobranca avulsa",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com uma chave rpk_ de integracao. Idempotency-Key nunca substitui o Bearer.\n\nESCOPO OBRIGATORIO: cobrancas:ler.\n\nDEPENDENCIAS E PRE-CONDICOES: utilitario Integracoes Externas ativo; cobranca criada por integracao e pertencente a empresa autenticada.\n\nRetorna a cobranca avulsa criada por uma integracao externa na empresa autenticada. Requer o escopo cobrancas:ler.",
+        "parameters": [
+          {
+            "name": "cobrancaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CobrancaIntegracaoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "IntegracaoBearer": [ ]
+          }
+        ]
+      }
+    },
+    "/integracoes/cobrancas/{cobrancaId}/cancelamento": {
+      "post": {
+        "tags": [
+          "Integracoes - cobrancas"
+        ],
+        "summary": "Cancela uma cobranca avulsa",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com uma chave rpk_ de integracao. Idempotency-Key nunca substitui o Bearer.\n\nESCOPO OBRIGATORIO: cobrancas:cancelar.\n\nDEPENDENCIAS E PRE-CONDICOES: utilitario Integracoes Externas ativo; cobranca criada por integracao e pertencente a empresa autenticada; cobranca pendente ou vencida; cobranca paga nao pode ser cancelada; tentativa no gateway, quando existente, precisa aceitar cancelamento.\n\nCancela explicitamente uma cobranca avulsa criada pela API. A operacao e idempotente, exige motivo e o escopo cobrancas:cancelar. Uma cobranca paga nunca e cancelada.",
+        "parameters": [
+          {
+            "name": "cobrancaId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "format": "int64"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/CancelarCobrancaIntegracaoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CobrancaIntegracaoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "IntegracaoBearer": [ ]
+          }
+        ]
+      }
+    },
+    "/integracoes/usos": {
+      "post": {
+        "tags": [
+          "Integracoes - consumo variavel"
+        ],
+        "summary": "Registra um consumo",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com uma chave rpk_ de integracao. Idempotency-Key nunca substitui o Bearer.\n\nESCOPO OBRIGATORIO: usos:escrever.\n\nDEPENDENCIAS E PRE-CONDICOES: utilitarios Integracoes Externas e Cobranca Variavel por Uso ativos; chave especifica ou geral com usos:escrever e fonte de integracao ativa vinculada; assinatura ativa e componente do tipo uso pertencentes a empresa autenticada; idExterno imutavel e idempotente dentro da fonte.\n\nRegistra somente quantidade consumida. Precos, descontos, impostos e demais regras comerciais sao definidos exclusivamente no RecoPay.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistrarUsoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "201": {
+            "description": "Created",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsoIntegracaoResponse"
+                }
+              }
+            }
+          },
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsoIntegracaoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "IntegracaoBearer": [ ]
+          }
+        ]
+      }
+    },
+    "/integracoes/usos/lote": {
+      "post": {
+        "tags": [
+          "Integracoes - consumo variavel"
+        ],
+        "summary": "Registra um lote de consumos",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com uma chave rpk_ de integracao. Idempotency-Key nunca substitui o Bearer.\n\nESCOPO OBRIGATORIO: usos:escrever.\n\nDEPENDENCIAS E PRE-CONDICOES: as mesmas dependencias do registro unitario; lote entre 1 e 500 itens; cada item e processado independentemente.\n\nProcessa de 1 a 500 consumos de forma independente e informa o resultado de cada item.",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/RegistrarUsosLoteRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsosLoteResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "IntegracaoBearer": [ ]
+          }
+        ]
+      }
+    },
+    "/integracoes/usos/{idExterno}": {
+      "get": {
+        "tags": [
+          "Integracoes - consumo variavel"
+        ],
+        "summary": "Consulta um consumo",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com uma chave rpk_ de integracao. Idempotency-Key nunca substitui o Bearer.\n\nESCOPO OBRIGATORIO: usos:ler.\n\nDEPENDENCIAS E PRE-CONDICOES: utilitarios Integracoes Externas e Cobranca Variavel por Uso ativos; idExterno pertencente a mesma fonte e empresa da chave.\n\nConsulta o consumo pelo identificador imutavel definido pelo sistema de origem.",
+        "parameters": [
+          {
+            "name": "idExterno",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/UsoIntegracaoResponse"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "IntegracaoBearer": [ ]
+          }
+        ]
+      }
+    },
+    "/integracoes/usos/{idExterno}/cancelamento": {
+      "post": {
+        "tags": [
+          "Integracoes - consumo variavel"
+        ],
+        "summary": "Cancela um consumo",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com uma chave rpk_ de integracao. Idempotency-Key nunca substitui o Bearer.\n\nESCOPO OBRIGATORIO: usos:cancelar.\n\nDEPENDENCIAS E PRE-CONDICOES: utilitarios Integracoes Externas e Cobranca Variavel por Uso ativos; idExterno pertencente a mesma fonte e empresa da chave; motivo obrigatorio; uso faturado gera compensacao no ciclo seguinte.\n\nDesfaz o consumo de forma idempotente. Se ainda estiver pendente, cancela o registro. Se ja estiver faturado, cria automaticamente um lancamento compensatorio para o proximo ciclo, sem alterar a cobranca consolidada. Exige motivo para auditoria.",
+        "parameters": [
+          {
+            "name": "idExterno",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/AlterarUsoRequest"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CancelamentoUsoResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "IntegracaoBearer": [ ]
+          }
+        ]
+      }
+    },
+    "/integracoes/assinaturas/{assinaturaReferencia}/situacao-financeira": {
+      "get": {
+        "tags": [
+          "Integracoes - situacao financeira"
+        ],
+        "summary": "Consulta a situacao financeira de uma assinatura",
+        "description": "AUTENTICACAO OBRIGATORIA: use Authorization: Bearer com uma chave rpk_ de integracao. Idempotency-Key nunca substitui o Bearer.\n\nESCOPO OBRIGATORIO: financeiro:ler.\n\nDEPENDENCIAS E PRE-CONDICOES: utilitario Integracoes Externas ativo; chave ativa com o escopo financeiro:ler; assinatura pertencente a empresa autenticada.\n\nRetorna fatos financeiros da assinatura e suas cobrancas vencidas. A API nao bloqueia o cliente: cada sistema consumidor aplica sua propria politica de tolerancia com base em maiorAtrasoDias. Requer o escopo financeiro:ler.",
+        "parameters": [
+          {
+            "name": "assinaturaReferencia",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SituacaoFinanceiraAssinaturaResponse"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "429": {
+            "description": "Too Many Requests",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
+          }
+        },
+        "security": [
+          {
+            "IntegracaoBearer": [ ]
+          }
+        ]
       }
     },
     "/health": {
@@ -1473,6 +3263,16 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "500": {
+            "description": "Erro interno inesperado. Informe o requestId ao suporte sem reenviar dados sensiveis.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/RespostaErro"
+                }
+              }
+            }
           }
         }
       }
@@ -1480,6 +3280,55 @@
   },
   "components": {
     "schemas": {
+      "AlterarUsoRequest": {
+        "required": [
+          "motivo"
+        ],
+        "type": "object",
+        "properties": {
+          "motivo": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Motivo obrigatorio para auditoria.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "CancelamentoUsoResponse": {
+        "type": "object",
+        "properties": {
+          "operacaoExecutada": {
+            "type": "string",
+            "nullable": true
+          },
+          "repetido": {
+            "type": "boolean"
+          },
+          "usoOriginal": {
+            "$ref": "#/components/schemas/UsoIntegracaoResponse"
+          },
+          "usoCompensatorio": {
+            "$ref": "#/components/schemas/UsoIntegracaoResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CancelarCobrancaIntegracaoRequest": {
+        "required": [
+          "motivo"
+        ],
+        "type": "object",
+        "properties": {
+          "motivo": {
+            "maxLength": 255,
+            "type": "string",
+            "description": "Motivo obrigatorio para auditoria.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
       "ClienteAssinaturaCancelamentoResponse": {
         "type": "object",
         "properties": {
@@ -1856,10 +3705,12 @@
         "type": "object",
         "properties": {
           "telefone": {
+            "maxLength": 20,
             "type": "string",
             "nullable": true
           },
           "emailFiscal": {
+            "maxLength": 150,
             "type": "string",
             "nullable": true
           },
@@ -1870,10 +3721,16 @@
         "additionalProperties": false
       },
       "ClienteCancelarAssinaturaRequest": {
+        "required": [
+          "motivoCancelamento"
+        ],
         "type": "object",
         "properties": {
           "motivoCancelamento": {
+            "maxLength": 255,
+            "minLength": 5,
             "type": "string",
+            "description": "Entre 5 e 255 caracteres.",
             "nullable": true
           }
         },
@@ -2173,17 +4030,29 @@
         "additionalProperties": false
       },
       "ClienteContratacaoRequest": {
+        "required": [
+          "documento",
+          "email",
+          "nome"
+        ],
         "type": "object",
         "properties": {
           "tipoPessoa": {
+            "maxLength": 1,
+            "enum": [
+              "F",
+              "J"
+            ],
             "type": "string",
             "nullable": true
           },
           "nome": {
+            "maxLength": 200,
             "type": "string",
             "nullable": true
           },
           "nomeFantasia": {
+            "maxLength": 200,
             "type": "string",
             "nullable": true
           },
@@ -2192,18 +4061,22 @@
             "nullable": true
           },
           "email": {
+            "maxLength": 150,
             "type": "string",
             "nullable": true
           },
           "emailFiscal": {
+            "maxLength": 150,
             "type": "string",
             "nullable": true
           },
           "telefone": {
+            "maxLength": 30,
             "type": "string",
             "nullable": true
           },
           "inscricaoMunicipal": {
+            "maxLength": 50,
             "type": "string",
             "nullable": true
           },
@@ -2251,10 +4124,65 @@
         },
         "additionalProperties": false
       },
+      "ClienteIntegracaoResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "tipoPessoa": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeRazaoSocial": {
+            "type": "string",
+            "nullable": true
+          },
+          "nomeFantasia": {
+            "type": "string",
+            "nullable": true
+          },
+          "documento": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "emailFiscal": {
+            "type": "string",
+            "nullable": true
+          },
+          "telefone": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataCriacao": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "repetido": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
       "ClienteLoginRequest": {
+        "required": [
+          "checkoutPublicoId",
+          "email",
+          "senha"
+        ],
         "type": "object",
         "properties": {
           "checkoutPublicoId": {
+            "maxLength": 80,
             "type": "string",
             "nullable": true
           },
@@ -2613,9 +4541,58 @@
         "additionalProperties": false
       },
       "ClienteRecuperarSenhaRequest": {
+        "required": [
+          "checkoutPublicoId",
+          "email"
+        ],
         "type": "object",
         "properties": {
           "checkoutPublicoId": {
+            "maxLength": 80,
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClienteRedefinirSenhaRequest": {
+        "type": "object",
+        "properties": {
+          "checkoutPublicoId": {
+            "type": "string",
+            "nullable": true
+          },
+          "token": {
+            "type": "string",
+            "nullable": true
+          },
+          "novaSenha": {
+            "type": "string",
+            "nullable": true
+          },
+          "confirmacaoSenha": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "ClienteSituacaoFinanceiraResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "documento": {
             "type": "string",
             "nullable": true
           },
@@ -2627,15 +4604,196 @@
         "additionalProperties": false
       },
       "ClienteTrocarSenhaRequest": {
+        "required": [
+          "confirmacaoSenha",
+          "novaSenha"
+        ],
         "type": "object",
         "properties": {
           "novaSenha": {
+            "minLength": 10,
             "type": "string",
+            "description": "Minimo de 10 caracteres.",
             "nullable": true
           },
           "confirmacaoSenha": {
+            "minLength": 10,
+            "type": "string",
+            "description": "Deve ser identica a novaSenha.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CobrancaAvulsaResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "clienteId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "competenciaReferencia": {
+            "type": "string",
+            "format": "date"
+          },
+          "dataVencimentoSolicitada": {
+            "type": "string",
+            "format": "date"
+          },
+          "dataVencimento": {
+            "type": "string",
+            "format": "date"
+          },
+          "valorOriginal": {
+            "type": "number",
+            "format": "double"
+          },
+          "valorRetencaoIss": {
+            "type": "number",
+            "format": "double"
+          },
+          "valorTotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "moeda": {
             "type": "string",
             "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "formaPagamento": {
+            "type": "string",
+            "nullable": true
+          },
+          "gateway": {
+            "type": "string",
+            "nullable": true
+          },
+          "nfseModoEmissao": {
+            "type": "string",
+            "nullable": true
+          },
+          "checkoutUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "repetido": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CobrancaEmAtrasoResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "vencimento": {
+            "type": "string",
+            "format": "date"
+          },
+          "diasEmAtraso": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "valor": {
+            "type": "number",
+            "format": "double"
+          },
+          "linkPagamento": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CobrancaIntegracaoResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "clienteId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "competenciaReferencia": {
+            "type": "string",
+            "format": "date"
+          },
+          "dataVencimento": {
+            "type": "string",
+            "format": "date"
+          },
+          "valorOriginal": {
+            "type": "number",
+            "format": "double"
+          },
+          "valorDesconto": {
+            "type": "number",
+            "format": "double"
+          },
+          "valorMulta": {
+            "type": "number",
+            "format": "double"
+          },
+          "valorJuros": {
+            "type": "number",
+            "format": "double"
+          },
+          "valorTotal": {
+            "type": "number",
+            "format": "double"
+          },
+          "moeda": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "formaPagamento": {
+            "type": "string",
+            "nullable": true
+          },
+          "gateway": {
+            "type": "string",
+            "nullable": true
+          },
+          "gatewayCobrancaId": {
+            "type": "string",
+            "nullable": true
+          },
+          "checkoutUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "dataPagamento": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "dataCriacao": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "dataAtualizacao": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "repetido": {
+            "type": "boolean"
           }
         },
         "additionalProperties": false
@@ -2684,6 +4842,11 @@
             "type": "number",
             "format": "double"
           },
+          "quantidadeInclusa": {
+            "type": "number",
+            "format": "double",
+            "nullable": true
+          },
           "valorUnitario": {
             "type": "number",
             "format": "double"
@@ -2711,7 +4874,23 @@
         },
         "additionalProperties": false
       },
+      "ConfirmarIntencaoContratacaoRequest": {
+        "type": "object",
+        "properties": {
+          "token": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
       "ContratacaoCheckoutRequest": {
+        "required": [
+          "cliente",
+          "componentes",
+          "formaPagamento",
+          "planoId"
+        ],
         "type": "object",
         "properties": {
           "planoId": {
@@ -2729,14 +4908,26 @@
             "nullable": true
           },
           "formaPagamento": {
+            "maxLength": 20,
+            "enum": [
+              "pix",
+              "boleto",
+              "cartao"
+            ],
             "type": "string",
             "nullable": true
           },
           "nfseModoEmissao": {
+            "maxLength": 30,
+            "enum": [
+              "manual",
+              "automatico_pagamento"
+            ],
             "type": "string",
             "nullable": true
           },
           "descricao": {
+            "maxLength": 255,
             "type": "string",
             "nullable": true
           },
@@ -2746,8 +4937,23 @@
             "nullable": true
           },
           "diaVencimento": {
+            "maximum": 28,
+            "minimum": 1,
             "type": "integer",
+            "description": "Dia entre 1 e 28.",
             "format": "int32",
+            "nullable": true
+          },
+          "termosUsoAceitos": {
+            "type": "boolean",
+            "description": "Deve ser true quando o produto exigir aceite de termos."
+          },
+          "cupomCodigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "intencaoToken": {
+            "type": "string",
             "nullable": true
           }
         },
@@ -2757,6 +4963,14 @@
         "type": "object",
         "properties": {
           "checkoutUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "contratacaoReferencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "assinaturaReferencia": {
             "type": "string",
             "nullable": true
           }
@@ -2775,6 +4989,233 @@
           },
           "dados": {
             "$ref": "#/components/schemas/ContratacaoCheckoutResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CriarClienteIntegracaoRequest": {
+        "required": [
+          "documento",
+          "email",
+          "nomeRazaoSocial"
+        ],
+        "type": "object",
+        "properties": {
+          "tipoPessoa": {
+            "maxLength": 1,
+            "enum": [
+              "F",
+              "J"
+            ],
+            "type": "string",
+            "description": "F para pessoa fisica ou J para pessoa juridica. Quando omitido, e inferido pelo documento.",
+            "nullable": true
+          },
+          "nomeRazaoSocial": {
+            "maxLength": 200,
+            "type": "string",
+            "description": "Nome completo ou razao social.",
+            "nullable": true
+          },
+          "nomeFantasia": {
+            "maxLength": 200,
+            "type": "string",
+            "nullable": true
+          },
+          "documento": {
+            "maxLength": 14,
+            "type": "string",
+            "description": "CPF com 11 digitos ou CNPJ com 14 digitos. Pontuacao e removida pelo servidor.",
+            "nullable": true
+          },
+          "inscricaoMunicipal": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "maxLength": 150,
+            "type": "string",
+            "nullable": true
+          },
+          "emailFiscal": {
+            "maxLength": 150,
+            "type": "string",
+            "nullable": true
+          },
+          "telefone": {
+            "maxLength": 20,
+            "type": "string",
+            "description": "Entre 10 e 20 digitos; formatacao e removida pelo servidor.",
+            "nullable": true
+          },
+          "clienteMei": {
+            "type": "boolean"
+          },
+          "retemIss": {
+            "type": "boolean"
+          },
+          "nfseModoEmissao": {
+            "maxLength": 30,
+            "enum": [
+              "manual",
+              "automatico_pagamento"
+            ],
+            "type": "string",
+            "nullable": true
+          },
+          "endereco": {
+            "$ref": "#/components/schemas/EnderecoClienteIntegracaoRequest"
+          },
+          "observacoes": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { },
+        "example": {
+          "tipoPessoa": "J",
+          "nomeRazaoSocial": "Empresa Exemplo Ltda",
+          "documento": "12345678000195",
+          "email": "financeiro@exemplo.com.br",
+          "telefone": "5514999999999",
+          "nfseModoEmissao": "manual"
+        }
+      },
+      "CriarCobrancaAvulsaRequest": {
+        "required": [
+          "dataVencimento",
+          "descricao",
+          "valorOriginal"
+        ],
+        "type": "object",
+        "properties": {
+          "descricao": {
+            "maxLength": 255,
+            "type": "string",
+            "nullable": true
+          },
+          "valorOriginal": {
+            "maximum": 9999999999999.99,
+            "minimum": 0.01,
+            "type": "number",
+            "description": "Valor bruto positivo, com no maximo duas casas decimais.",
+            "format": "double"
+          },
+          "dataVencimento": {
+            "type": "string",
+            "format": "date"
+          },
+          "competenciaReferencia": {
+            "type": "string",
+            "format": "date",
+            "nullable": true
+          },
+          "formaPagamento": {
+            "maxLength": 20,
+            "enum": [
+              "pix",
+              "boleto",
+              "cartao"
+            ],
+            "type": "string",
+            "description": "Quando omitida, usa a preferencia do cliente.",
+            "nullable": true
+          },
+          "nfseModoEmissao": {
+            "maxLength": 30,
+            "enum": [
+              "manual",
+              "automatico_pagamento"
+            ],
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { },
+        "example": {
+          "descricao": "Mensalidade de suporte",
+          "valorOriginal": 150.00,
+          "dataVencimento": "2026-09-10",
+          "competenciaReferencia": "2026-09-01",
+          "formaPagamento": "boleto",
+          "nfseModoEmissao": "automatico_pagamento"
+        }
+      },
+      "CupomCheckoutResponse": {
+        "type": "object",
+        "properties": {
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "nome": {
+            "type": "string",
+            "nullable": true
+          },
+          "valorOriginal": {
+            "type": "number",
+            "format": "double"
+          },
+          "valorDesconto": {
+            "type": "number",
+            "format": "double"
+          },
+          "valorFinal": {
+            "type": "number",
+            "format": "double"
+          },
+          "moeda": {
+            "type": "string",
+            "nullable": true
+          },
+          "duracao": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "CupomCheckoutResponseRespostaComDados": {
+        "type": "object",
+        "properties": {
+          "sucesso": {
+            "type": "boolean"
+          },
+          "mensagem": {
+            "type": "string",
+            "nullable": true
+          },
+          "dados": {
+            "$ref": "#/components/schemas/CupomCheckoutResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "CupomCheckoutSimulacaoRequest": {
+        "type": "object",
+        "properties": {
+          "planoId": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "documento": {
+            "type": "string",
+            "nullable": true
+          },
+          "email": {
+            "type": "string",
+            "nullable": true
+          },
+          "componentes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/ComponenteContratacaoRequest"
+            },
+            "nullable": true
           }
         },
         "additionalProperties": false
@@ -2800,6 +5241,44 @@
           }
         },
         "additionalProperties": false
+      },
+      "EnderecoClienteIntegracaoRequest": {
+        "type": "object",
+        "properties": {
+          "logradouro": {
+            "type": "string",
+            "nullable": true
+          },
+          "numero": {
+            "type": "string",
+            "nullable": true
+          },
+          "complemento": {
+            "type": "string",
+            "nullable": true
+          },
+          "bairro": {
+            "type": "string",
+            "nullable": true
+          },
+          "cep": {
+            "type": "string",
+            "nullable": true
+          },
+          "municipio": {
+            "type": "string",
+            "nullable": true
+          },
+          "uf": {
+            "type": "string",
+            "nullable": true
+          },
+          "codigoMunicipioIbge": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
       },
       "EnderecoContratacaoRequest": {
         "type": "object",
@@ -3015,6 +5494,10 @@
             "type": "string",
             "nullable": true
           },
+          "termosUsoHtml": {
+            "type": "string",
+            "nullable": true
+          },
           "logoUrl": {
             "type": "string",
             "nullable": true
@@ -3081,6 +5564,87 @@
         },
         "additionalProperties": false
       },
+      "RegistrarUsoRequest": {
+        "required": [
+          "assinaturaReferencia",
+          "componenteCodigo",
+          "idExterno",
+          "ocorridoEm",
+          "quantidade"
+        ],
+        "type": "object",
+        "properties": {
+          "assinaturaReferencia": {
+            "maxLength": 64,
+            "type": "string",
+            "nullable": true
+          },
+          "componenteCodigo": {
+            "maxLength": 50,
+            "type": "string",
+            "nullable": true
+          },
+          "idExterno": {
+            "maxLength": 150,
+            "type": "string",
+            "description": "Identificador imutavel e idempotente dentro da fonte.",
+            "nullable": true
+          },
+          "quantidade": {
+            "minimum": 0.0001,
+            "type": "number",
+            "description": "Quantidade positiva com no maximo quatro casas decimais.",
+            "format": "double"
+          },
+          "ocorridoEm": {
+            "type": "string",
+            "description": "Data e hora com fuso explicito, entre 90 dias no passado e cinco minutos no futuro.",
+            "format": "date-time"
+          },
+          "descricao": {
+            "maxLength": 255,
+            "type": "string",
+            "nullable": true
+          },
+          "metadados": {
+            "type": "object",
+            "additionalProperties": { },
+            "description": "Objeto opcional com ate 8 KB depois de serializado.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { },
+        "example": {
+          "assinaturaReferencia": "assinatura-erp-123",
+          "componenteCodigo": "pedidos-processados",
+          "idExterno": "pedido-98765",
+          "quantidade": 1.0000,
+          "ocorridoEm": "2026-08-25T10:30:00-03:00",
+          "descricao": "Pedido processado",
+          "metadados": {
+            "origem": "erp"
+          }
+        }
+      },
+      "RegistrarUsosLoteRequest": {
+        "required": [
+          "usos"
+        ],
+        "type": "object",
+        "properties": {
+          "usos": {
+            "maxItems": 500,
+            "minItems": 1,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/RegistrarUsoRequest"
+            },
+            "description": "Cada item e processado independentemente.",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
       "RespostaErro": {
         "type": "object",
         "properties": {
@@ -3104,15 +5668,192 @@
           }
         },
         "additionalProperties": false
+      },
+      "SituacaoFinanceiraAssinaturaResponse": {
+        "type": "object",
+        "properties": {
+          "assinaturaReferencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "assinaturaStatus": {
+            "type": "string",
+            "nullable": true
+          },
+          "cliente": {
+            "$ref": "#/components/schemas/ClienteSituacaoFinanceiraResponse"
+          },
+          "situacaoFinanceira": {
+            "type": "string",
+            "nullable": true
+          },
+          "possuiCobrancasEmAtraso": {
+            "type": "boolean"
+          },
+          "quantidadeCobrancasEmAtraso": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "valorTotalEmAtraso": {
+            "type": "number",
+            "format": "double"
+          },
+          "maiorAtrasoDias": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "consultadoEm": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "cobrancasEmAtraso": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/CobrancaEmAtrasoResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "UsoIntegracaoResponse": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "idExterno": {
+            "type": "string",
+            "nullable": true
+          },
+          "assinaturaReferencia": {
+            "type": "string",
+            "nullable": true
+          },
+          "componenteCodigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "quantidade": {
+            "type": "number",
+            "format": "double"
+          },
+          "status": {
+            "type": "string",
+            "nullable": true
+          },
+          "ocorridoEm": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "recebidoEm": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "cobrancaId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "cobrancaItemId": {
+            "type": "integer",
+            "format": "int64",
+            "nullable": true
+          },
+          "repetido": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UsoLoteItemResponse": {
+        "type": "object",
+        "properties": {
+          "posicao": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "idExterno": {
+            "type": "string",
+            "nullable": true
+          },
+          "sucesso": {
+            "type": "boolean"
+          },
+          "codigo": {
+            "type": "string",
+            "nullable": true
+          },
+          "mensagem": {
+            "type": "string",
+            "nullable": true
+          },
+          "uso": {
+            "$ref": "#/components/schemas/UsoIntegracaoResponse"
+          }
+        },
+        "additionalProperties": false
+      },
+      "UsosLoteResponse": {
+        "type": "object",
+        "properties": {
+          "quantidadeRecebida": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantidadeProcessada": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "quantidadeComErro": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "itens": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/UsoLoteItemResponse"
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "securitySchemes": {
+      "IntegracaoBearer": {
+        "type": "http",
+        "description": "Informe a chave no formato Bearer rpk_prefixo_segredo. Chaves legadas rcu_ permanecem aceitas enquanto ativas. Finalidades funcionam como presets; cada operacao continua limitada por escopo, empresa e disponibilidade do recurso.",
+        "scheme": "bearer",
+        "bearerFormat": "rpk_prefixo_segredo"
+      },
+      "ClienteBearer": {
+        "type": "http",
+        "description": "Token do cliente final retornado por POST /clientes/auth/login. Nao use uma chave rpk_ nesta autorizacao.",
+        "scheme": "bearer",
+        "bearerFormat": "rct.payload.assinatura"
       }
     }
   },
   "tags": [
     {
+      "name": "Central do Cliente"
+    },
+    {
       "name": "Checkout"
     },
     {
-      "name": "Clientes"
+      "name": "Integracoes - clientes"
+    },
+    {
+      "name": "Integracoes - cobrancas"
+    },
+    {
+      "name": "Integracoes - consumo variavel"
+    },
+    {
+      "name": "Integracoes - situacao financeira"
     },
     {
       "name": "Sistema"

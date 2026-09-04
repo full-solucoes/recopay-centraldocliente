@@ -23,6 +23,12 @@ export function recuperarSenha(checkoutPublicoId, email) {
     .then((res) => extrairDados(res, {}))
 }
 
+export function redefinirSenha(checkoutPublicoId, token, novaSenha, confirmacaoSenha) {
+  return http
+    .post('/clientes/auth/redefinir-senha', { checkoutPublicoId, token, novaSenha, confirmacaoSenha })
+    .then((res) => extrairDados(res, {}))
+}
+
 /**
  * Define a senha definitiva do cliente autenticado.
  * POST /clientes/auth/trocar-senha
