@@ -18,7 +18,7 @@
 </template>
 
 <script>
-export const RECOPY_LOGO_URL = 'https://app.recopay.com.br/imgs/logo-peq.png'
+export const RECOPY_LOGO_URL = 'https://recopay.app/imgs/logo-peq.png'
 
 export default {
   name: 'AuthLayout',

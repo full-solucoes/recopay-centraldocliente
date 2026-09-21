@@ -143,7 +143,7 @@ Resumo esperado:
   "valorTotal": 99.9,
   "vencimento": "2026-07-10",
   "competencia": "2026-07",
-  "checkoutUrl": "https://app.recopay.com.br/Cobrancas/Visualizar/..."
+  "checkoutUrl": "https://recopay.app/Cobrancas/Visualizar/..."
 }
 ```
 
